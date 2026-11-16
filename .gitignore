@@ -26,3 +26,8 @@ output/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# 非核心文件（课程实验指导书与草稿，保留在本地但不入库）
+github-lab*.md
+my app.py
+my_app.py
