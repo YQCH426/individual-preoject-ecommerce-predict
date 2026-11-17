@@ -55,6 +55,9 @@ try:
     ax.imshow(wc, interpolation="bilinear")
     ax.axis("off")
     st.pyplot(fig_wc)
+except OSError:
+    # 字体文件打不开（如缺少 msyh.ttc）时，只提示文字，不抛出错误
+    st.info("提示：未能打开中文字体文件（msyh.ttc），本次跳过词云图展示。可将 font_path 换成本机已有的中文字体。")
 except Exception as e:
     st.warning(f"词云图生成失败，可能是缺少中文字体文件。错误信息：{e}")
 
@@ -66,7 +69,10 @@ if st.button("生成避雷建议"):
     with st.spinner("AI 正在研判当前品类的风险..."):
         
         # 读取 API Key (从 .streamlit/secrets.toml 读取)
-        api_key = st.secrets["DEEPSEEK_API_KEY"]
+        try:
+            api_key = st.secrets["DEEPSEEK_API_KEY"]
+        except KeyError:
+            api_key = None
         
         if not api_key:
             st.error("⚠️ 未检测到 API Key！请在 .streamlit/secrets.toml 中填入 DEEPSEEK_API_KEY。这里先展示模拟数据：")
