@@ -45,7 +45,7 @@ text_for_cloud = " ".join(words)
 # 注意：这里为了兼容 Windows，直接指定了默认中文字体
 try:
     wc = WordCloud(
-        font_path="msyh.ttc",  # Windows 默认微软雅黑字体，Mac 可换为 "PingFang.ttc"
+        font_path="NotoSansSC-Regular.ttf",  # 项目根目录下的 Noto Sans SC 字体
         background_color="white",
         width=800,
         height=400
