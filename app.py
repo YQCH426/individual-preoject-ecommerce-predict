@@ -57,7 +57,7 @@ try:
     st.pyplot(fig_wc)
 except OSError:
     # 字体文件打不开（如缺少 msyh.ttc）时，只提示文字，不抛出错误
-    st.info("提示：未能打开中文字体文件（msyh.ttc），本次跳过词云图展示。可将 font_path 换成本机已有的中文字体。")
+    st.info("提示：未能打开中文字体文件（NotoSansSC-Regular.ttf），本次跳过词云图展示。请确认该字体文件已放在项目根目录。")
 except Exception as e:
     st.warning(f"词云图生成失败，可能是缺少中文字体文件。错误信息：{e}")
 
