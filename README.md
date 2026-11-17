@@ -60,13 +60,20 @@ pip install -r requirements.txt
 
 ### 3. 配置 LLM API Key（AI 智能导购需要）
 
-在项目根目录新建 `.env` 文件，填入你的密钥：
+在项目根目录下新建 `.streamlit/secrets.toml` 文件，填入你的密钥：
 
-```text
-DEEPSEEK_API_KEY=你的密钥
+```toml
+# .streamlit/secrets.toml
+DEEPSEEK_API_KEY = "你的密钥"
 ```
 
-> `.env` 已在 `.gitignore` 中被忽略，**不会被提交到仓库**，请勿将密钥直接写入代码。
+应用中通过 Streamlit 原生的 secrets 接口读取：
+
+```python
+api_key = st.secrets["DEEPSEEK_API_KEY"]
+```
+
+> `.streamlit/` 目录已在 `.gitignore` 中被忽略，**secrets.toml 不会被提交到仓库**，请勿将密钥硬编码进代码，也不要使用 `.env` / `python-dotenv` 方案。
 
 ### 4. 启动应用
 
@@ -80,8 +87,10 @@ streamlit run app.py
 
 ```text
 ecommerce-predict/
-├── app.py              # Streamlit 应用入口
-├── requirements.txt    # 依赖清单
-├── .gitignore          # 忽略规则（.env、数据文件等）
+├── app.py                  # Streamlit 应用入口
+├── requirements.txt        # 依赖清单
+├── .streamlit/
+│   └── secrets.toml        # LLM API Key（本地配置，被 .gitignore 忽略，不入库）
+├── .gitignore              # 忽略规则（.streamlit/、数据文件等）
 └── README.md
 ```
